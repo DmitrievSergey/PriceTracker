@@ -1,0 +1,21 @@
+spring:
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/price_tracker}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update # Hibernate сам создаст таблицы, если их нет в базе
+    show-sql: true # Будем видеть весь сгенерированный SQL в консоли
+    properties:
+      hibernate:
+        format_sql: true # Делает SQL в логах красивым и читаемым
+
+app:
+  datasource:
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
