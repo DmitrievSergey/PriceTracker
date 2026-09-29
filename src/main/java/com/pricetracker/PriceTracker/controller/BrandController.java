@@ -5,6 +5,7 @@ import com.pricetracker.PriceTracker.dto.CreateBrandRequestDto;
 import com.pricetracker.PriceTracker.entity.Brand;
 import com.pricetracker.PriceTracker.exception.BrandAlreadyExistsException;
 import com.pricetracker.PriceTracker.service.BrandService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class BrandController {
     private final BrandService brandService;
 
     @PostMapping
-    public ResponseEntity<BrandResponseDto> createBrand(@RequestBody CreateBrandRequestDto request) throws BrandAlreadyExistsException {
+    public ResponseEntity<BrandResponseDto> createBrand(@Valid @RequestBody CreateBrandRequestDto request) throws BrandAlreadyExistsException {
         Brand brand = brandService.createBrand(request.name());
         BrandResponseDto response = new BrandResponseDto(
                 brand.getId(), brand.getName(), brand.getCreatedAt()
