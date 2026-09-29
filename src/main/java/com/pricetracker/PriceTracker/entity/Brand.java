@@ -3,12 +3,14 @@ package com.pricetracker.PriceTracker.entity;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
 @Table(name = "brands")
+@EntityListeners(AuditingEntityListener.class)
 public class Brand {
     @Id
     private UUID id;
