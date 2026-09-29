@@ -1,13 +1,15 @@
 package com.pricetracker.PriceTracker.service;
 
+import com.pricetracker.PriceTracker.dto.ProductResponseDto;
 import com.pricetracker.PriceTracker.entity.Brand;
 import com.pricetracker.PriceTracker.entity.Product;
 import com.pricetracker.PriceTracker.exception.EntityNotFoundException;
 import com.pricetracker.PriceTracker.repository.ProductRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -31,5 +33,18 @@ public class ProductService {
         brand.addProduct(createdProduct);
 
         return productRepository.save(createdProduct);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductResponseDto> getAllProducts() {
+        return productRepository.findAll().stream().map(
+                product -> new ProductResponseDto(
+                        product.getId(),
+                        product.getName(),
+                        product.getSku(),
+                        product.getBrand().getId(),
+                        product.getBrand().getName()
+                )
+        ).toList();
     }
 }

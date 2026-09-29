@@ -6,6 +6,7 @@ import com.pricetracker.PriceTracker.exception.EntityNotFoundException;
 import com.pricetracker.PriceTracker.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -15,6 +16,7 @@ import java.util.UUID;
 public class BrandService {
     private final BrandRepository brandRepository;
 
+    @Transactional
     public Brand createBrand(String name) throws BrandAlreadyExistsException {
         if(brandRepository.existsByName(name)) {
             throw new BrandAlreadyExistsException("Brand with name " + name + " already exists");
