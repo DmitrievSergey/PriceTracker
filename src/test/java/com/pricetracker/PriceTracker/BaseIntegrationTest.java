@@ -14,7 +14,7 @@ import org.testcontainers.postgresql.PostgreSQLContainer;
 @Testcontainers
 public abstract class BaseIntegrationTest {
     @Container
-    @ServiceConnection // Спринговая магия: сама свяжет конфиги DataSource с этим контейнером!
+    @ServiceConnection
     protected static final PostgreSQLContainer postgres =
             new PostgreSQLContainer("postgres:16-alpine");
 
@@ -24,8 +24,7 @@ public abstract class BaseIntegrationTest {
 
     @DynamicPropertySource
     static void overrideKafkaProperties(DynamicPropertyRegistry registry) {
-        // Вытаскиваем случайный порт, на котором поднялась тестовая Кафка в Докере,
-        // и подставляем его в конфиг Спринга прямо перед запуском теста!
+
         registry.add("spring.kafka.bootstrap-servers", kafka::getBootstrapServers);
     }
 }

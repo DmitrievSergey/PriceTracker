@@ -18,7 +18,7 @@ public class KafkaTaskProducer {
         String topic = "price-parsing-tasks";
         log.info("Sending parse task to Kafka topic '{}' for product: {}", topic, task.productId());
 
-        // Отправляем сообщение в топик
+
         kafkaTemplate.send(topic, task);
     }
 }

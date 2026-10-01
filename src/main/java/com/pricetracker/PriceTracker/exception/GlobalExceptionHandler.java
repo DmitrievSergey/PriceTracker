@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST.value()); // 400
+        body.put("status", HttpStatus.BAD_REQUEST.value());
         body.put("error", "Validation Failed");
 
         // Собираем все ошибки валидации в аккуратную карту
