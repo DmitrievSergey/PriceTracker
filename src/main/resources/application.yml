@@ -15,6 +15,12 @@ spring:
       hibernate:
         format_sql: true # Делает SQL в логах красивым и читаемым
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+
 app:
   datasource:
     username: ${POSTGRES_USER}
